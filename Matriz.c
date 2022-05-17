@@ -41,3 +41,25 @@ int set_valor(Matriz *z, int l, int c, int valor){
 	(*z).dados[l][c] = valor;
 	return 0;
 }
+
+int carrega_arquivo(char *nome, Matriz *p){
+	FILE *f = fopen(nome, "r");
+	if (f==NULL)
+		return ERRO_ABERTURA;
+		
+	int linha, coluna, ii, jj, numero;
+
+	if(fscanf(f, "%d %d", &linha, &coluna) != 2)
+    	return ERRO_ABERTURA;
+	
+	inicializa_matriz(p,linha,coluna);	
+    for(ii=0; ii<linha; ii++){
+        for(jj=0; jj<coluna; jj++){
+            fscanf( f, "%d", &numero);
+            set_valor(p,ii,jj,numero);
+        }
+    }
+	    
+	fclose(f);
+	return 1;
+}
