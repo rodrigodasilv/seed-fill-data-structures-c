@@ -42,6 +42,12 @@ int set_valor(Matriz *z, int l, int c, int valor){
 	return 0;
 }
 
+int get_valor(Matriz *z, int l, int c){
+	if (l>=z->lin || c>=z->col)
+		return COORDENADA_INVALIDA;
+	return z->dados[l][c];
+}
+
 int carrega_arquivo(char *nome, Matriz *p){
 	FILE *f = fopen(nome, "r");
 	if (f==NULL)
