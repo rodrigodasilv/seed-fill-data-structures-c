@@ -11,3 +11,4 @@ void mostra_matriz(Matriz *x);
 void desaloca_matriz(Matriz *y);
 int set_valor(Matriz *z, int l, int c, int valor);
 int carrega_arquivo(char *nome, Matriz *p);
+int escreve_arquivo(char *nome, Matriz *p);

@@ -63,3 +63,21 @@ int carrega_arquivo(char *nome, Matriz *p){
 	fclose(f);
 	return 1;
 }
+
+int escreve_arquivo(char *nome, Matriz *p){
+	FILE *f = fopen(nome, "w");
+	if (f==NULL)
+		return ERRO_ABERTURA;
+		
+	fprintf(f,"%d %d \n",p->lin, p->col);
+	int i,j;
+	for(i=0;i< p->lin; i++){
+		for(j=0;j< p->col; j++){
+			fprintf(f,"%i ", p->dados[i][j]);
+		}
+		fprintf(f,"\n");
+	}
+	printf("\n");
+	fclose(f);
+	return 1;
+}
