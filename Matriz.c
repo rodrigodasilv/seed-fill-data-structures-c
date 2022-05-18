@@ -83,7 +83,6 @@ int escreve_arquivo(char *nome, Matriz *p){
 		}
 		fprintf(f,"\n");
 	}
-	printf("\n");
 	fclose(f);
 	return 1;
 }
