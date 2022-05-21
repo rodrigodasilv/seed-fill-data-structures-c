@@ -13,3 +13,4 @@ int set_valor(Matriz *z, int l, int c, int valor);
 int get_valor(Matriz *z, int l, int c);
 int carrega_arquivo(char *nome, Matriz *p);
 int escreve_arquivo(char *nome, Matriz *p);
+int mostra_capacidade(Matriz *w);

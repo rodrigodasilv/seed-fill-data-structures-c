@@ -35,6 +35,18 @@ void desaloca_matriz(Matriz *y){
 	free((*y).dados);
 }
 
+
+int mostra_capacidade(Matriz *w){
+	
+	int i,j, tamanho;
+	for(i=0;i< (*w).lin; i++){
+		for(j=0;j< (*w).col; j++){
+			tamanho++;
+		}	
+	}
+	return tamanho;
+}
+
 int set_valor(Matriz *z, int l, int c, int valor){
 	if (l>=(*z).lin || c>=(*z).col)
 		return COORDENADA_INVALIDA;
