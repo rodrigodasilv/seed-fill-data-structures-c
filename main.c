@@ -28,9 +28,9 @@ int main(int argc, char *argv[]) {
 	printf("Digite o valor para a nova cor: ");
 	scanf("%d", &COR);
 	
-	int cap_matriz = mostra_capacidade(&m);
+
 	PilhaGenerica p1;
-	inicializa_pilha( &p1, cap_matriz, sizeof( Pixel ) );
+	inicializa_pilha( &p1, m.lin * m.col, sizeof( Pixel ) );
 	
 	
 	int ORIG = get_valor( &m, S[0], S[1]);
@@ -38,29 +38,29 @@ int main(int argc, char *argv[]) {
 	
 	empilha( &p1, &S );
 	while( !pilha_vazia( p1 ) ){
-		int i, j;
 		Pixel K;
 		desempilha(&p1, &K);
+		
 		
 		if(get_valor( &m, K.x, K.y) != COR){
 			set_valor(&m, K.x, K.y,COR);
 			
-			if(get_valor( &m, K.x+1, K.y) == ORIG){
+			if((K.x+1 < m.lin ) && (get_valor( &m, K.x+1, K.y) == ORIG)){
 				Pixel I = {K.x+1, K.y};
 				empilha( &p1, &I );
 			}
 			
-			if(get_valor( &m, K.x-1, K.y) == ORIG){
+			if((K.x-1 >= 0 ) && (get_valor( &m, K.x-1, K.y) == ORIG)){
 				Pixel I = {K.x-1, K.y};
 				empilha( &p1, &I );
 			}
 			
-			if(get_valor( &m, K.x, K.y+1) == ORIG){
+			if((K.y+1 < m.col) && (get_valor( &m, K.x, K.y+1) == ORIG)){
 				Pixel I = {K.x, K.y+1};
 				empilha( &p1, &I );
 			}
 			
-			if(get_valor( &m, K.x, K.y-1) == ORIG){
+			if((K.y-1 >= 0) && (get_valor( &m, K.x, K.y-1) == ORIG)){
 				Pixel I = {K.x, K.y-1};
 				empilha( &p1, &I );
 			}
