@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
 	
 	empilha( &p1, &S );
 	while( !pilha_vazia( p1 ) ){
-		int i, j;
 		Pixel K;
 		desempilha(&p1, &K);
 		
