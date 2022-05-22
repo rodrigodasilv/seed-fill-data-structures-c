@@ -53,7 +53,6 @@ int main(int argc, char *argv[]) {
 			
 			if((get_valor( &m, get_x(&K), get_y(&K)-1) == ORIG)){
 				carrega_pixel(&I,get_x(&K), get_y(&K)-1);
-				Pixel I = {K.x, K.y-1};
 				empilha( &p1, &I );
 			}
 		} 	
