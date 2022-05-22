@@ -6,61 +6,53 @@
 
 int main(int argc, char *argv[]) {
 	Matriz m;
-	
 	if (carrega_arquivo("arquivo_entrada.txt",&m)==ERRO_ABERTURA){
 		printf("Erro na abertura do arquivo!");
-		return -1;
+		return ERRO_ABERTURA;
 	}
-	
-	
-	mostra_matriz(&m);
-	
-	
+	mostra_matriz(&m);	
 	int x, y, COR;
-	int S[] = {0, 0};
-	int I[] = {0, 0};
+	Pixel S,I;
 	printf("Digite as coordenadas (x, y): ");
 	scanf("%d%d", &x, &y);
-	S[0] = x;
-	S[1] = y;
-	
+	carrega_pixel(&S,x,y);
 
 	printf("Digite o valor para a nova cor: ");
 	scanf("%d", &COR);
-	
 
 	PilhaGenerica p1;
-	inicializa_pilha( &p1, m.lin * m.col, sizeof( Pixel ) );
-	
-	
-	int ORIG = get_valor( &m, S[0], S[1]);
-	
+	inicializa_pilha( &p1, get_capacidade(&m), sizeof(Pixel));
+	if(get_valor( &m, get_x(&S), get_y(&S))==COORDENADA_INVALIDA){
+		printf("Coordenada invalida!");
+		return COORDENADA_INVALIDA;
+	}
+	int ORIG = get_valor( &m, get_x(&S), get_y(&S));
 	
 	empilha( &p1, &S );
 	while( !pilha_vazia( p1 ) ){
 		Pixel K;
 		desempilha(&p1, &K);
 		
-		
-		if(get_valor( &m, K.x, K.y) != COR){
-			set_valor(&m, K.x, K.y,COR);
+		if(get_valor( &m, get_x(&K), get_y(&K)) != COR){
+			set_valor(&m, get_x(&K), get_y(&K),COR);
 			
-			if((K.x+1 < m.lin ) && (get_valor( &m, K.x+1, K.y) == ORIG)){
-				Pixel I = {K.x+1, K.y};
+			if((get_valor( &m, get_x(&K)+1, get_y(&K)) == ORIG)){
+				carrega_pixel(&I,get_x(&K)+1, get_y(&K));
 				empilha( &p1, &I );
 			}
 			
-			if((K.x-1 >= 0 ) && (get_valor( &m, K.x-1, K.y) == ORIG)){
-				Pixel I = {K.x-1, K.y};
+			if((get_valor( &m, get_x(&K)-1, get_y(&K)) == ORIG)){
+				carrega_pixel(&I,get_x(&K)-1, get_y(&K));
 				empilha( &p1, &I );
 			}
 			
-			if((K.y+1 < m.col) && (get_valor( &m, K.x, K.y+1) == ORIG)){
-				Pixel I = {K.x, K.y+1};
+			if((get_valor( &m, get_x(&K), get_y(&K)+1) == ORIG)){
+				carrega_pixel(&I,get_x(&K), get_y(&K)+1);
 				empilha( &p1, &I );
 			}
 			
-			if((K.y-1 >= 0) && (get_valor( &m, K.x, K.y-1) == ORIG)){
+			if((get_valor( &m, get_x(&K), get_y(&K)-1) == ORIG)){
+				carrega_pixel(&I,get_x(&K), get_y(&K)-1);
 				Pixel I = {K.x, K.y-1};
 				empilha( &p1, &I );
 			}

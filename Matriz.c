@@ -43,9 +43,13 @@ int set_valor(Matriz *z, int l, int c, int valor){
 }
 
 int get_valor(Matriz *z, int l, int c){
-	if (l>=z->lin || c>=z->col)
+	if (l>=z->lin || c>=z->col || l<0 || c<0)
 		return COORDENADA_INVALIDA;
 	return z->dados[l][c];
+}
+
+int get_capacidade(Matriz *w){
+	return w->col*w->lin;
 }
 
 int carrega_arquivo(char *nome, Matriz *p){
